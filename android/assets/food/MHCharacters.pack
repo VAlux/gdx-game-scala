@@ -1,0 +1,305 @@
+
+MHCharacters.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Browsers/Firefox_Logo
+  rotate: false
+  xy: 1, 1
+  size: 553, 530
+  orig: 553, 530
+  offset: 0, 0
+  index: -1
+Browsers/Google_Chrome
+  rotate: false
+  xy: 556, 79
+  size: 472, 452
+  orig: 472, 452
+  offset: 0, 0
+  index: -1
+Browsers/Yandex_browser
+  rotate: false
+  xy: 1030, 111
+  size: 420, 420
+  orig: 420, 420
+  offset: 0, 0
+  index: -1
+Browsers/safari
+  rotate: false
+  xy: 1452, 275
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+
+MHCharacters2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Doodle
+  rotate: false
+  xy: 1, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: 1
+Doodle_01_spinning_easy
+  rotate: false
+  xy: 147, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: -1
+Doodle_01_spinning_hard
+  rotate: false
+  xy: 293, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: -1
+Doodle
+  rotate: false
+  xy: 439, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: 2
+Doodle_02_spinning_easy
+  rotate: false
+  xy: 585, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: -1
+Doodle_02_spinning_hard
+  rotate: false
+  xy: 731, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: -1
+Doodle
+  rotate: false
+  xy: 877, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: 3
+Doodle_03_spinning_easy
+  rotate: false
+  xy: 1023, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: -1
+Doodle_03_spinning_hard
+  rotate: false
+  xy: 1169, 1
+  size: 144, 133
+  orig: 144, 133
+  offset: 0, 0
+  index: -1
+
+MHCharacters3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+FlappyBird
+  rotate: false
+  xy: 1, 725
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: 1
+FlappyBird_01_spinning_easy
+  rotate: false
+  xy: 1, 363
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: -1
+FlappyBird_01_spinning_hard
+  rotate: false
+  xy: 378, 725
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: -1
+FlappyBird
+  rotate: false
+  xy: 1, 1
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: 2
+FlappyBird_02_spinning_easy
+  rotate: false
+  xy: 378, 363
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: -1
+FlappyBird_02_spinning_hard
+  rotate: false
+  xy: 755, 725
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: -1
+FlappyBird
+  rotate: false
+  xy: 378, 1
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: 3
+FlappyBird_03_spinning_easy
+  rotate: false
+  xy: 755, 363
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: -1
+FlappyBird_03_spinning_hard
+  rotate: false
+  xy: 755, 1
+  size: 375, 360
+  orig: 375, 360
+  offset: 0, 0
+  index: -1
+
+MHCharacters4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+RedBird
+  rotate: false
+  xy: 1, 325
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: 1
+RedBird_01_spinning_easy
+  rotate: false
+  xy: 1, 1
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: -1
+RedBird_01_spinning_hard
+  rotate: false
+  xy: 339, 325
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: -1
+RedBird
+  rotate: false
+  xy: 339, 1
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: 2
+RedBird_02_spinning_easy
+  rotate: false
+  xy: 677, 325
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: -1
+RedBird_02_spinning_hard
+  rotate: false
+  xy: 677, 1
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: -1
+RedBird
+  rotate: false
+  xy: 1015, 325
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: 3
+RedBird_03_spinning_easy
+  rotate: false
+  xy: 1015, 1
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: -1
+RedBird_03_spinning_hard
+  rotate: false
+  xy: 1353, 325
+  size: 336, 322
+  orig: 336, 322
+  offset: 0, 0
+  index: -1
+
+MHCharacters5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+YellowBird
+  rotate: false
+  xy: 1, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: 1
+YellowBird_01_spinning_easy
+  rotate: false
+  xy: 1, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+YellowBird_01_spinning_hard
+  rotate: false
+  xy: 259, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+YellowBird
+  rotate: false
+  xy: 259, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: 2
+YellowBird_02_spinning_easy
+  rotate: false
+  xy: 517, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+YellowBird_02_spinning_hard
+  rotate: false
+  xy: 517, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+YellowBird
+  rotate: false
+  xy: 775, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: 3
+YellowBird_03_spinning_easy
+  rotate: false
+  xy: 775, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+YellowBird_03_spinning_hard
+  rotate: false
+  xy: 1033, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
