@@ -13,9 +13,6 @@ class MainstreamHater(val width: Int = 0, val height: Int = 0, val isDesktop: Bo
   private[alvo] var img: Texture = _
 
   override def create(): Unit = {
-
-//    val circle = CircleBuilder(0.5f, new Vector2(0.0f, 0.0f), None).createEntity(0.5f, 0.8f, 0.4f)
-//    val chief = ChiefBuilder(new Vector2(0.0f, 0.5f), None).createEntity(0.5f, 0.8f, 0.4f)
     setScreen(GameScreen)
   }
 

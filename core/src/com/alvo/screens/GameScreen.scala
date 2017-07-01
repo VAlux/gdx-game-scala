@@ -1,16 +1,15 @@
 package com.alvo.screens
 
-import com.alvo.box2d.entities.{Chief, Controllable}
-import com.alvo.box2d.world.GameWorld
+import com.alvo.box2d.EntityBuilderInstances._
+import com.alvo.box2d.{Circle, EntityBuilder, Rectangle}
 import com.alvo.constants.Constants
-import com.alvo.utils.MetricsHelper
-import com.badlogic.gdx.{Gdx, Screen}
-import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera, Texture}
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
-import com.badlogic.gdx.graphics.g2d.{BitmapFont, Sprite, SpriteBatch}
-import com.badlogic.gdx.math.{MathUtils, Vector2}
-import com.badlogic.gdx.physics.box2d.{Body, Box2DDebugRenderer}
+import com.badlogic.gdx.graphics.g2d.{BitmapFont, SpriteBatch}
+import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera, Texture}
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d._
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.{Gdx, Screen}
 
 /**
   * Created by alvo on 17.05.17.
@@ -20,13 +19,15 @@ object GameScreen extends Screen {
   Gdx.app.log("GAME SCREEN", "game screen created")
 
   val camera: OrthographicCamera = new OrthographicCamera(Gdx.graphics.getWidth, Gdx.graphics.getHeight)
-  val freshCamera: OrthographicCamera = new OrthographicCamera(Gdx.graphics.getWidth, Gdx.graphics.getHeight)
   val debugRenderer: Box2DDebugRenderer = new Box2DDebugRenderer()
   val batch: SpriteBatch = new SpriteBatch()
   val gameFont: BitmapFont = createGameFont()
   val backgroundTexture = new Texture(Gdx.files.internal("SideElements/background.png"))
   val bodies = new Array[Body](Constants.DEFAULT_BODY_INITIAL_CAPACITY)
-  val chief = GameWorld.spawnChief(new Vector2(0.0f, -5.0f))
+  val world: World = new World(new Vector2(0.0f, -9.8f), true)
+
+  val box: Body = EntityBuilder.buildEntity(Rectangle(20.0f, 10.0f))
+  val circle: Body = EntityBuilder.buildEntity(Circle(10.0f))
 
   /**
     * Internal method for generating the game bitmap font.
@@ -46,63 +47,46 @@ object GameScreen extends Screen {
   }
 
   override def render(delta: Float): Unit = {
-    Gdx.gl.glClearColor(0, 0, 0, 1)
+    Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1)
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
-    processInputForEntity(chief)
+    world.step(Constants.TIME_STEP, Constants.VELOCITY_ITERATIONS, Constants.POSITION_ITERATIONS)
 
-    GameWorld.physicalWorldComponent.step(Constants.TIME_STEP, Constants.VELOCITY_ITERATIONS, Constants.POSITION_ITERATIONS)
-
-    // world.checkSpawnFood()
-    // world.getCurrentFood.update()
-
-    freshCamera.update()
     camera.update()
     batch.begin()
-    batch.setProjectionMatrix(freshCamera.combined)
-    batch.draw(
-      backgroundTexture,
-      -MetricsHelper.halfWidthInMeter * Constants.PX_M_SCALE,
-      -MetricsHelper.halfHeightInMeter * Constants.PX_M_SCALE,
-       MetricsHelper.halfWidthInMeter * Constants.PX_M_SCALE * 2,
-       MetricsHelper.halfHeightInMeter * Constants.PX_M_SCALE * 2)
-
     batch.setProjectionMatrix(camera.combined)
 
-    GameWorld.entitiesWithSprites.foreach { entityWithSprite =>
-      val body = entityWithSprite.physicalEntityComponent.body
-      val sprite = body.getUserData.asInstanceOf[Sprite]
-      sprite.setPosition(body.getPosition.x - sprite.getWidth / 2, body.getPosition.y - sprite.getHeight / 2)
-      sprite.setOrigin(sprite.getWidth / 2, sprite.getHeight / 2)
-      sprite.setRotation(body.getAngle * MathUtils.radiansToDegrees)
-      sprite.draw(batch)
-    }
+    // some rendering goes here //
 
     batch.end()
 
     if (Constants.DEBUG_INFO_ENABLED) {
-      debugRenderer.render(GameWorld.physicalWorldComponent, camera.combined)
+      debugRenderer.render(world, camera.combined)
     }
   }
 
-  def processInputForEntity(controllable: Controllable): Unit = controllable.handleInput()
-
   override def resize(width: Int, height: Int): Unit = {
-    camera.viewportWidth = width * Constants.SCALE
-    camera.viewportHeight = height * Constants.SCALE
     camera.update()
   }
 
-  override def show(): Unit = {}
+  override def show(): Unit = {
+    Gdx.app.log("GAME SCREEN", "show the screen")
+  }
 
-  override def resume(): Unit = {}
+  override def resume(): Unit = {
+    Gdx.app.log("GAME SCREEN", "resume the screen")
+  }
 
-  override def pause(): Unit = {}
+  override def pause(): Unit = {
+    Gdx.app.log("GAME SCREEN", "pause the screen")
+  }
 
-  override def hide(): Unit = {}
+  override def hide(): Unit = {
+    Gdx.app.log("GAME SCREEN", "hide the screen")
+  }
 
   override def dispose(): Unit = {
-    GameWorld.dispose()
-    Gdx.app.log("GAME SCREEN", "world disposed")
+    world.dispose()
+    Gdx.app.log("GAME SCREEN", "game screen disposed")
   }
 }
