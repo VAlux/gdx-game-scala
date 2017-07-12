@@ -35,6 +35,10 @@ object Constants {
   // Collide Groups
   val GROUP_CHIEF_FRAME: Int = -1
 
+  //Control
+  val ACCELEROMETER_CALIBRATION_HEIGHT: Float = 70.0f
+  val ACCELEROMETER_SCALE: Float = 16.0f
+
   //TODO: this should be loaded from config.
   val FOOD_STATES_AMOUNT = 3
   val CHIEF_SPRITE_PATH = "Chiefs/NECHUPARA.png"

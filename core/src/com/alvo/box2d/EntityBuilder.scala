@@ -51,9 +51,9 @@ object EntityBuilderInstances {
     override def build(circle: Circle, properties: PhysicalEntityProperties): Body = {
       val circleBody = GameScreen.world.createBody(createBodyDef(BodyType.DynamicBody))
       val shape = new CircleShape
+      shape.setRadius(circle.radius)
       circleBody.createFixture(createFixtureDef(shape, properties))
       circleBody.setTransform(properties.position, circleBody.getAngle)
-      shape.setRadius(circle.radius)
       shape.dispose()
       circleBody
     }
@@ -63,9 +63,9 @@ object EntityBuilderInstances {
     override def build(rectangle: Rectangle, properties: PhysicalEntityProperties): Body = {
       val rectangleBody = GameScreen.world.createBody(createBodyDef(BodyType.DynamicBody))
       val shape = new PolygonShape()
+      shape.setAsBox(rectangle.height, rectangle.width, properties.position, 0.0f)
       rectangleBody.createFixture(createFixtureDef(shape, properties))
       rectangleBody.setTransform(properties.position, rectangleBody.getAngle)
-      shape.setAsBox(rectangle.height, rectangle.width, properties.position, 0.0f)
       shape.dispose()
       rectangleBody
     }

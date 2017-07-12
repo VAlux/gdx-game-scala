@@ -1,6 +1,8 @@
 package com.alvo.screens
 
-import com.alvo.box2d.{Circle, EntityBuilder, PhysicalEntityProperties}
+import com.alvo.EntityStore
+import com.alvo.EntityStore.EntityWithPhysicalProperties
+import com.alvo.box2d._
 import com.alvo.constants.Constants
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, SpriteBatch}
@@ -27,7 +29,8 @@ object GameScreen extends Screen {
   val bodies = new Array[Body](Constants.DEFAULT_BODY_INITIAL_CAPACITY)
   val world: World = new World(new Vector2(0.0f, -9.8f), true)
 
-  EntityBuilder.buildEntity(Circle(10.0f))(PhysicalEntityProperties(position = new Vector2(10.0f, 10.0f)))
+  EntityBuilder.buildEntity(Circle(10.0f))(PhysicalEntityProperties())
+  val test: Body = EntityBuilder.buildEntity(Rectangle(10.0f, 10.0f))(PhysicalEntityProperties())
 
   /**
     * Internal method for generating the game bitmap font.
