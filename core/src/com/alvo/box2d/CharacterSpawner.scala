@@ -20,7 +20,7 @@ object CharacterSpawner {
       EntityWithBody(foodEntity, EntityBuilder.buildEntity(foodEntity)(foodProperties))
   }
   
-  val spawnChief: (EntityWithPhysicalProperties) => EntityWithBody = createChiefBody _ andThen EntityStore.storeEntity
+  val spawnChief: EntityWithPhysicalProperties => EntityWithBody = createChiefBody _ andThen EntityStore.storeEntity
 
-  val spawnFood: (EntityWithPhysicalProperties) => EntityWithBody = createFoodBody _ andThen EntityStore.storeEntity
+  val spawnFood: EntityWithPhysicalProperties => EntityWithBody = createFoodBody _ andThen EntityStore.storeEntity
 }

@@ -16,19 +16,24 @@ final case class Rectangle(width: Float, height: Float) extends Entity
 final case class Polygon(vertices: Array[Float]) extends Entity
 
 sealed trait Character extends Entity
-case class Chief() extends Character
-case class Food() extends Character
+final case class Chief() extends Character
+final case class Food() extends Character
 
 final case class PhysicalEntityProperties(
   density: Float = 10.0f,
   friction: Float = 10.0f,
   restitution: Float = 10.0f,
-  position: Vector2 = new Vector2(0.0f, 0.0f)
+  position: Vector2 = new Vector2(0.0f, 0.0f),
+  bodyType: BodyType = BodyType.DynamicBody,
+  gravityScale: Float = 1.0f
 )
 
 trait EntityBuilder[A] {
 
   def build(entity: A, properties: PhysicalEntityProperties): Body
+
+  protected def createBody(properties: PhysicalEntityProperties): Body =
+    GameScreen.world.createBody(createBodyDef(properties.bodyType))
 
   protected def createBodyDef(bodyType: BodyType): BodyDef = {
     val bodyDef = new BodyDef
@@ -49,7 +54,7 @@ trait EntityBuilder[A] {
 object EntityBuilderInstances {
   implicit val circleEntityBuilder = new EntityBuilder[Circle] {
     override def build(circle: Circle, properties: PhysicalEntityProperties): Body = {
-      val circleBody = GameScreen.world.createBody(createBodyDef(BodyType.DynamicBody))
+      val circleBody = createBody(properties)
       val shape = new CircleShape
       shape.setRadius(circle.radius)
       circleBody.createFixture(createFixtureDef(shape, properties))
@@ -61,7 +66,7 @@ object EntityBuilderInstances {
 
   implicit val rectangleEntityBuilder = new EntityBuilder[Rectangle] {
     override def build(rectangle: Rectangle, properties: PhysicalEntityProperties): Body = {
-      val rectangleBody = GameScreen.world.createBody(createBodyDef(BodyType.DynamicBody))
+      val rectangleBody = createBody(properties)
       val shape = new PolygonShape()
       shape.setAsBox(rectangle.height, rectangle.width, properties.position, 0.0f)
       rectangleBody.createFixture(createFixtureDef(shape, properties))
@@ -73,7 +78,7 @@ object EntityBuilderInstances {
 
   implicit val polygonEntityBuilder = new EntityBuilder[Polygon] {
     override def build(polygon: Polygon, properties: PhysicalEntityProperties): Body = {
-      val polygonBody = GameScreen.world.createBody(createBodyDef(BodyType.DynamicBody))
+      val polygonBody = createBody(properties)
       val shape = new PolygonShape()
       polygonBody.createFixture(createFixtureDef(shape, properties))
       polygonBody.setTransform(properties.position, polygonBody.getAngle)
@@ -91,7 +96,7 @@ object EntityBuilderInstances {
 
   implicit val foodEntityBuilder = new EntityBuilder[Food] {
     override def build(food: Food, properties: PhysicalEntityProperties): Body = {
-      EntityBuilder.buildEntity(Circle(10.0f))(PhysicalEntityProperties())
+      EntityBuilder.buildEntity(Circle(10.0f))(PhysicalEntityProperties(gravityScale = 0.0f))
     }
   }
 }

@@ -17,8 +17,6 @@ import com.badlogic.gdx.{Gdx, Screen}
   */
 object GameScreen extends Screen {
 
-  import com.alvo.box2d.EntityBuilderInstances._
-
   Gdx.app.log("GAME SCREEN", "game screen created")
 
   val camera: OrthographicCamera = new OrthographicCamera(Gdx.graphics.getWidth, Gdx.graphics.getHeight)
@@ -28,9 +26,11 @@ object GameScreen extends Screen {
   val backgroundTexture = new Texture(Gdx.files.internal("SideElements/background.png"))
   val bodies = new Array[Body](Constants.DEFAULT_BODY_INITIAL_CAPACITY)
   val world: World = new World(new Vector2(0.0f, -9.8f), true)
+  val chief: EntityStore.EntityWithBody = CharacterSpawner.spawnChief(EntityWithPhysicalProperties(Chief()))
 
-  EntityBuilder.buildEntity(Circle(10.0f))(PhysicalEntityProperties())
-  val test: Body = EntityBuilder.buildEntity(Rectangle(10.0f, 10.0f))(PhysicalEntityProperties())
+  val chiefControllable: Controllable with KeyboardControllable = new Controllable(chief) with KeyboardControllable
+
+  Gdx.input.setInputProcessor(chiefControllable)
 
   /**
     * Internal method for generating the game bitmap font.
@@ -53,6 +53,8 @@ object GameScreen extends Screen {
     Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1)
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
+    chiefControllable.handleInput()
+
     world.step(Constants.TIME_STEP, Constants.VELOCITY_ITERATIONS, Constants.POSITION_ITERATIONS)
 
     camera.update()
@@ -69,6 +71,8 @@ object GameScreen extends Screen {
   }
 
   override def resize(width: Int, height: Int): Unit = {
+    camera.viewportWidth = width
+    camera.viewportHeight = height
     camera.update()
   }
 
