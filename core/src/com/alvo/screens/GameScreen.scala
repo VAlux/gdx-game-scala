@@ -26,7 +26,9 @@ object GameScreen extends Screen {
   val backgroundTexture = new Texture(Gdx.files.internal("SideElements/background.png"))
   val bodies = new Array[Body](Constants.DEFAULT_BODY_INITIAL_CAPACITY)
   val world: World = new World(new Vector2(0.0f, -9.8f), true)
-  val chief: EntityStore.EntityWithBody = CharacterSpawner.spawnChief(EntityWithPhysicalProperties(Chief()))
+
+  val chief: EntityStore.EntityWithBody =
+    CharacterSpawner.spawnChief(EntityWithPhysicalProperties(Chief(), Constants.CHIEF_PHYSICAL_PROPERTIES))
 
   val chiefControllable: Controllable with KeyboardControllable = new Controllable(chief) with KeyboardControllable
 
@@ -71,8 +73,8 @@ object GameScreen extends Screen {
   }
 
   override def resize(width: Int, height: Int): Unit = {
-    camera.viewportWidth = width
-    camera.viewportHeight = height
+    camera.viewportWidth = width / Constants.VIEWPORT_SCALE
+    camera.viewportHeight = height / Constants.VIEWPORT_SCALE
     camera.update()
   }
 
