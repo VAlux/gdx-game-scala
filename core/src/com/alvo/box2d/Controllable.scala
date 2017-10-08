@@ -33,30 +33,25 @@ trait AccelerometerControllable extends Controllable {
   override def handleInput(): Unit = {
     val scaledVelocityX = scaleVelocity(Gdx.input.getAccelerometerX)
     val scaledVelocityY = scaleVelocity(Gdx.input.getAccelerometerY)
-    entity.body.setLinearVelocity(scaledVelocityX, scaledVelocityY + Constants.ACCELEROMETER_CALIBRATION_HEIGHT)
-    Gdx.app.log("AccelerometerControllable", s"velocity: [x:$scaledVelocityX y:$scaledVelocityY]")
+    entity.body.setLinearVelocity(scaledVelocityX, scaledVelocityY)
   }
 }
 
 trait KeyboardControllable extends Controllable {
-  val entityImpulseForce = Constants.ENTITY_IMPULSE_FORCE
+  val entityImpulseForce: Float = Constants.ENTITY_IMPULSE_FORCE
 
   override def handleInput(): Unit = {
     if (Gdx.input.isKeyPressed(Input.Keys.W)) {
       entity.body.applyLinearImpulse(0.0f, entityImpulseForce, 0.0f, 0.0f, true)
-      Gdx.app.log("KeyboardControllable", "Key W pressed")
     }
     if (Gdx.input.isKeyPressed(Input.Keys.D)) {
       entity.body.applyLinearImpulse(entityImpulseForce, 0.0f, 0.0f, 0.0f, true)
-      Gdx.app.log("KeyboardControllable", "Key D pressed")
     }
     if (Gdx.input.isKeyPressed(Input.Keys.A)) {
       entity.body.applyLinearImpulse(-entityImpulseForce, 0.0f, 0.0f, 0.0f, true)
-      Gdx.app.log("KeyboardControllable", "Key A pressed")
     }
     if (Gdx.input.isKeyPressed(Input.Keys.S)) {
       entity.body.applyLinearImpulse(0.0f, -entityImpulseForce, 0.0f, 0.0f, true)
-      Gdx.app.log("KeyboardControllable", "Key S pressed")
     }
   }
 }

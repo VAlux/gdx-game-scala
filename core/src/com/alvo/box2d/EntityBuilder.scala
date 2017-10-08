@@ -14,6 +14,7 @@ sealed trait Entity
 final case class Circle(radius: Float) extends Entity
 final case class Rectangle(width: Float, height: Float) extends Entity
 final case class Polygon(vertices: Array[Float]) extends Entity
+final case class Chain(vertices: Array[Vector2]) extends Entity
 
 sealed trait Character extends Entity
 final case class Chief() extends Character
@@ -92,6 +93,18 @@ object EntityBuilderInstances {
       shape.set(polygon.vertices)
       shape.dispose()
       polygonBody
+    }
+  }
+
+  implicit val chainShapeBuilder = new EntityBuilder[Chain] {
+    override def build(entity: Chain, properties: PhysicalEntityProperties): Body = {
+      val chainShapeBody = createBody(properties)
+      val shape = new ChainShape
+      shape.createLoop(entity.vertices)
+      chainShapeBody.createFixture(createFixtureDef(shape, properties))
+      chainShapeBody.setTransform(properties.position, chainShapeBody.getAngle)
+      shape.dispose()
+      chainShapeBody
     }
   }
 

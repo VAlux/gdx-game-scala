@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.useGL30 = false;
 		config.width = 480;
 		config.height = 640;
-		new LwjglApplication(new MainstreamHater(config.width, config.height, true), config);
+		new LwjglApplication(MainstreamHater.apply(true, config.width, config.height), config);
 	}
 }

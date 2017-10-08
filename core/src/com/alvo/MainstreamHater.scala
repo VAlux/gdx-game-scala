@@ -1,24 +1,16 @@
 package com.alvo
 
 import com.alvo.screens.GameScreen
-import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.{Game, Gdx}
 
 /**
   * Created by alvo on 2/19/17.
   */
 class MainstreamHater(val width: Int = 0, val height: Int = 0, val isDesktop: Boolean = true) extends Game {
-  private[alvo] var batch: SpriteBatch = _
-  private[alvo] var img: Texture = _
-
   override def create(): Unit = {
     setScreen(GameScreen)
+    Gdx.app.log("MainstreamHater", s"${if(isDesktop) "desktop" else "mobile"} game instance with params width: $width height: $height created.")
   }
-
-  override def render(): Unit = super.render()
-
-  override def dispose(): Unit = super.dispose()
 }
 
 object MainstreamHater {
@@ -35,12 +27,10 @@ object MainstreamHater {
   }
 
   def apply: MainstreamHater = {
-    Gdx.app.log("MainstreamHater", "default game instance created.")
     applyInstance(new MainstreamHater())
   }
 
   def apply(isDesktop: Boolean, width: Int, height: Int): MainstreamHater = {
-    Gdx.app.log("MainstreamHater", s"${if(isDesktop) "desktop" else "mobile"} game instance with params width: $width height: $height created.")
     applyInstance(new MainstreamHater(width, height, isDesktop))
   }
 
