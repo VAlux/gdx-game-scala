@@ -23,13 +23,18 @@ object Environment {
     createGameFont()
   }
 
-  lazy val bondingFrame: EntityWithBody = Log.info("Environment", "Creating bounding frame...") {
+  lazy val mainBondingFrame: EntityWithBody = Log.info("Environment", "Creating main bounding frame...") {
     createBoundingFrame()
+  }
+
+  lazy val secondaryBondingFrame: EntityWithBody = Log.info("Environment", "Creating secondary bounding frame...") {
+    createBoundingFrame(Constants.HOLE_DEPTH * 4.0f, Constants.HOLE_DEPTH * 4.0f)
   }
 
   /**
     * Internal method for generating the game bitmap font.
     * Main font properties and available characters are container in the Constants object
+    *
     * @return generated BitmapFont
     */
   private def createGameFont(): BitmapFont = {
@@ -44,9 +49,9 @@ object Environment {
     font
   }
 
-  def createBoundingFrame(): EntityWithBody = {
-    val topLeftX: Float = MetricsTranslator.widthInMeter + Constants.HOLE_DEPTH * 2.0f
-    val topLeftY: Float = MetricsTranslator.heightInMeter + Constants.HOLE_DEPTH * 2.0f
+  private def createBoundingFrame(dx: Float = 0.0f, dy: Float = 0.0f): EntityWithBody = {
+    val topLeftX: Float = MetricsTranslator.widthInMeter + dx
+    val topLeftY: Float = MetricsTranslator.heightInMeter + dy
 
     val chainPoints: Array[Vector2] = Array(
       new Vector2(-topLeftX, -topLeftY),

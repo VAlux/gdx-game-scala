@@ -11,7 +11,7 @@ object Constants {
 
   // Graphics:
   val SCALE = 3.0f
-  val PX_M_SCALE = 16f
+  val PX_M_SCALE = 4f
   val FONT_CHARACTERS: String =
     "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" +
     "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +

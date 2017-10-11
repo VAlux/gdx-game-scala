@@ -1,5 +1,6 @@
 package com.alvo.screens
 
+import com.alvo.EntityStore.EntityWithBody
 import com.alvo.box2d._
 import com.alvo.constants.Constants
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -19,7 +20,8 @@ object GameScreen extends Screen {
   val batch: SpriteBatch = new SpriteBatch()
   val backgroundTexture = new Texture(Gdx.files.internal(Constants.BACKGROUND_PATH))
   val world: World = new World(Constants.GRAVITY, true)
-  val frame = Environment.createBoundingFrame()
+  val frame: EntityWithBody = Environment.mainBondingFrame
+  val secondaryFrame: EntityWithBody = Environment.secondaryBondingFrame
 
   Gdx.input.setInputProcessor(Environment.chiefControllable)
 
