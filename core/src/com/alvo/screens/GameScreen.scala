@@ -20,8 +20,13 @@ object GameScreen extends Screen {
   val batch: SpriteBatch = new SpriteBatch()
   val backgroundTexture = new Texture(Gdx.files.internal(Constants.BACKGROUND_PATH))
   val world: World = new World(Constants.GRAVITY, true)
-  val frame: EntityWithBody = Environment.mainBondingFrame
+
+  //TODO: consider removing this and initializing in some different way...
+  val frame: EntityWithBody          = Environment.mainBondingFrame
   val secondaryFrame: EntityWithBody = Environment.secondaryBondingFrame
+  val topWall: EntityWithBody        = Environment.topWall
+  val bottomWall: EntityWithBody     = Environment.bottomWall
+  //
 
   Gdx.input.setInputProcessor(Environment.chiefControllable)
 

@@ -31,6 +31,24 @@ object Constants {
   val POSITION_ITERATIONS = 3
   val CHIEF_DAMPING = 5.0f
 
+  val CHIEF_PHYSICAL_PROPERTIES = PhysicalEntityProperties(
+    gravityScale = 0.0f,
+    linearDamping = CHIEF_DAMPING,
+    angularDamping = CHIEF_DAMPING,
+    fixedRotation = true
+  )
+
+  val BOUNDING_FRAME_PHYSICAL_PROPERTIES = PhysicalEntityProperties(
+    friction = 0.5f,
+    restitution = 0.6f,
+    bodyType = BodyType.StaticBody
+  )
+
+  val WALL_PHYSICAL_PROPERTIES: PhysicalEntityProperties = PhysicalEntityProperties(
+    friction = 0.7f,
+    restitution = 0.1f
+  )
+
   // Game-play
   val HELL_DOOR_SPEED = 9.0f
   val SCORE_INCREMENT = 10
@@ -56,17 +74,4 @@ object Constants {
   val FOOD_TEST_DOODLE_SPRITE_PATH = "food/Games/Doodle/Doodle_01.png"
   val PACKED_FOOD_PACK_PATH = "Packed/food/MHCharacters.pack"
   val BACKGROUND_PATH: String = "SideElements/background.png"
-
-  val CHIEF_PHYSICAL_PROPERTIES = PhysicalEntityProperties(
-    gravityScale = 0.0f,
-    linearDamping = CHIEF_DAMPING,
-    angularDamping = CHIEF_DAMPING,
-    fixedRotation = true
-  )
-
-  val BOUNDING_FRAME_PHYSICAL_PROPERTIES = PhysicalEntityProperties(
-    friction = 0.5f,
-    restitution = 0.6f,
-    bodyType = BodyType.StaticBody
-  )
 }

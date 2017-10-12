@@ -15,6 +15,7 @@ final case class Circle(radius: Float) extends Entity
 final case class Rectangle(width: Float, height: Float) extends Entity
 final case class Polygon(vertices: Array[Float]) extends Entity
 final case class Chain(vertices: Array[Vector2]) extends Entity
+final case class Empty() extends Entity
 
 sealed trait Character extends Entity
 final case class Chief() extends Character
@@ -76,7 +77,7 @@ object EntityBuilderInstances {
     override def build(rectangle: Rectangle, properties: PhysicalEntityProperties): Body = {
       val rectangleBody = createBody(properties)
       val shape = new PolygonShape
-      shape.setAsBox(rectangle.height, rectangle.width, properties.position, 0.0f)
+      shape.setAsBox(rectangle.width, rectangle.height, properties.position, 0.0f)
       rectangleBody.createFixture(createFixtureDef(shape, properties))
       rectangleBody.setTransform(properties.position, rectangleBody.getAngle)
       shape.dispose()
@@ -117,6 +118,12 @@ object EntityBuilderInstances {
   implicit val foodEntityBuilder = new EntityBuilder[Food] {
     override def build(food: Food, properties: PhysicalEntityProperties): Body = {
       EntityBuilder.buildEntity(Circle(10.0f))(properties)
+    }
+  }
+
+  implicit val emptyEntityBuilder = new EntityBuilder[Empty] {
+    override def build(entity: Empty, properties: PhysicalEntityProperties): Body = {
+      createBody(properties)
     }
   }
 }
