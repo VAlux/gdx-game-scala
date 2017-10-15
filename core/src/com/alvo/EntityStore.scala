@@ -11,7 +11,7 @@ import scala.collection.mutable
 object EntityStore {
 
   final case class EntityWithBody(entity: Entity, body: Body)
-  final case class EntityWithPhysicalProperties(entity: Entity, properties: PhysicalEntityProperties = PhysicalEntityProperties())
+  final case class EntityWithPhysicalProperties[A <: Entity](entity: A, properties: PhysicalEntityProperties = PhysicalEntityProperties())
 
   private[this] val store: mutable.Map[Entity, Body] = mutable.Map[Entity, Body]()
   
