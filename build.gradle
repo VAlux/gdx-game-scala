@@ -96,3 +96,16 @@ tasks.eclipse.doLast {
 task wrapper(type: Wrapper) {
     gradleVersion = '4.4'
 }
+
+subprojects {
+    if(it.name != "android") { // android plugin is not compatible with java plugin
+        apply plugin: "java"
+        apply plugin: "idea"
+        idea {
+            module {
+                scopes.PROVIDED.minus += [configurations.compile]
+                scopes.COMPILE.plus += [configurations.compile]
+            }
+        }
+    }
+}

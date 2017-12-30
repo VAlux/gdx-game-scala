@@ -31,12 +31,12 @@ object Environment {
     createBoundingFrame(Constants.HOLE_DEPTH * 4.0f, Constants.HOLE_DEPTH * 4.0f)
   }
 
-  lazy val topWall: EntityWithBody = Log.info("Environment", "Creating top wall...") {
-    createWall(MetricsTranslator.widthInMeter - 10.0f, 0.0f, 10.0f, MetricsTranslator.halfHeightInMeter)
+  lazy val topWall: EntityWithBody = Log.info("Environment", "Creating bottom wall...") {
+    createWall(MetricsTranslator.widthInMeter - 10.0f, MetricsTranslator.halfHeightInMeter, 10.0f, MetricsTranslator.halfHeightInMeter)
   }
 
-  lazy val bottomWall: EntityWithBody = Log.info("Environment", "Creating bottom wall...") {
-    createWall(MetricsTranslator.widthInMeter - 10.0f, MetricsTranslator.halfHeightInMeter, 10.0f, MetricsTranslator.halfHeightInMeter)
+  lazy val bottomWall: EntityWithBody = Log.info("Environment", "Creating top wall...") {
+    createWall(MetricsTranslator.widthInMeter - 10.0f, -MetricsTranslator.halfHeightInMeter, 10.0f, MetricsTranslator.halfHeightInMeter)
   }
 
   /**
@@ -71,6 +71,8 @@ object Environment {
   }
 
   private def createWall(x: Float, y: Float, width: Float, height: Float): EntityWithBody = {
-    EntitySpawner.wallSpawner(EntityWithPhysicalProperties(Rectangle(width, height), Constants.WALL_PHYSICAL_PROPERTIES))
+    val wall: EntityWithBody = EntitySpawner.wallSpawner(EntityWithPhysicalProperties(Rectangle(width, height), Constants.WALL_PHYSICAL_PROPERTIES))
+    wall.body.setTransform(x, y, 0.0f)
+    wall
   }
 }

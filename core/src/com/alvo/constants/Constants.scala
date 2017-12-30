@@ -46,7 +46,8 @@ object Constants {
 
   val WALL_PHYSICAL_PROPERTIES: PhysicalEntityProperties = PhysicalEntityProperties(
     friction = 0.7f,
-    restitution = 0.1f
+    restitution = 0.1f,
+    bodyType = BodyType.StaticBody
   )
 
   // Game-play

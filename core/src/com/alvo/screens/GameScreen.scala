@@ -21,14 +21,15 @@ object GameScreen extends Screen {
   val backgroundTexture = new Texture(Gdx.files.internal(Constants.BACKGROUND_PATH))
   val world: World = new World(Constants.GRAVITY, true)
 
-  //TODO: consider removing this and initializing in some different way...
+  // Environment entity initialization:
+  val chief: Controllable with KeyboardControllable = Environment.chiefControllable
   val frame: EntityWithBody          = Environment.mainBondingFrame
   val secondaryFrame: EntityWithBody = Environment.secondaryBondingFrame
   val topWall: EntityWithBody        = Environment.topWall
   val bottomWall: EntityWithBody     = Environment.bottomWall
   //
 
-  Gdx.input.setInputProcessor(Environment.chiefControllable)
+  Gdx.input.setInputProcessor(chief)
 
   override def render(delta: Float): Unit = {
     Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1)
