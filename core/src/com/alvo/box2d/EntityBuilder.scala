@@ -6,10 +6,6 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType
 import com.badlogic.gdx.physics.box2d._
 
-/**
-  * Created by alvo on 01.07.17.
-  * Contains building mechanisms for creating and managing box2d primitives
-  */
 sealed trait Entity
 
 final case class Circle(radius: Float) extends Entity
@@ -115,19 +111,19 @@ object EntityBuilderInstances {
     }
   }
 
-  implicit val chiefEntityBuilder = new EntityBuilder[Chief] {
+  implicit val chiefEntityBuilder: EntityBuilder[Chief] = new EntityBuilder[Chief] {
     override def build(chief: Chief, properties: PhysicalEntityProperties): Body = {
       EntityBuilder.buildEntity(Circle(20.0f))(properties)
     }
   }
 
-  implicit val foodEntityBuilder = new EntityBuilder[Food] {
+  implicit val foodEntityBuilder: EntityBuilder[Food] = new EntityBuilder[Food] {
     override def build(food: Food, properties: PhysicalEntityProperties): Body = {
       EntityBuilder.buildEntity(Circle(10.0f))(properties)
     }
   }
 
-  implicit val emptyEntityBuilder = new EntityBuilder[Empty] {
+  implicit val emptyEntityBuilder: EntityBuilder[Empty] = new EntityBuilder[Empty] {
     override def build(entity: Empty, properties: PhysicalEntityProperties): Body = {
       createBody(properties)
     }
