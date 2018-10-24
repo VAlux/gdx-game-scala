@@ -9,7 +9,9 @@ import com.badlogic.gdx.{Game, Gdx}
 class MainstreamHater(val width: Int = 0, val height: Int = 0, val isDesktop: Boolean = true) extends Game {
   override def create(): Unit = {
     setScreen(GameScreen)
-    Gdx.app.log("MainstreamHater", s"${if(isDesktop) "desktop" else "mobile"} game instance with params width: $width height: $height created.")
+    Gdx.app.log("MainstreamHater",
+      s"${if(isDesktop) "desktop" else "mobile"} " +
+        s"game instance with params width: $width height: $height created.")
   }
 }
 

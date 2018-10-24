@@ -62,6 +62,7 @@ object Constants {
 
   // Metrics
   val HOLE_DEPTH = 5.0f
+  val WALL_WIDTH = 10.0f
 
   // Collide Groups
   val GROUP_CHIEF_FRAME: Int = -1

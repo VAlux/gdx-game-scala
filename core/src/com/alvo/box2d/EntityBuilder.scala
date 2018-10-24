@@ -11,27 +11,32 @@ import com.badlogic.gdx.physics.box2d._
   * Contains building mechanisms for creating and managing box2d primitives
   */
 sealed trait Entity
+
 final case class Circle(radius: Float) extends Entity
+
 final case class Rectangle(width: Float, height: Float) extends Entity
+
 final case class Polygon(vertices: Array[Float]) extends Entity
+
 final case class Chain(vertices: Array[Vector2]) extends Entity
+
 final case class Empty() extends Entity
 
 sealed trait Character extends Entity
+
 final case class Chief() extends Character
+
 final case class Food() extends Character
 
-final case class PhysicalEntityProperties(
-  density: Float = 1.0f,
-  friction: Float = 1.0f,
-  restitution: Float = 1.0f,
-  position: Vector2 = new Vector2(0.0f, 0.0f),
-  bodyType: BodyType = BodyType.DynamicBody,
-  gravityScale: Float = 1.0f,
-  linearDamping: Float = 0.0f,
-  angularDamping: Float = 0.0f,
-  fixedRotation: Boolean = false
-)
+final case class PhysicalEntityProperties(density: Float = 1.0f,
+                                          friction: Float = 1.0f,
+                                          restitution: Float = 1.0f,
+                                          position: Vector2 = new Vector2(0.0f, 0.0f),
+                                          bodyType: BodyType = BodyType.DynamicBody,
+                                          gravityScale: Float = 1.0f,
+                                          linearDamping: Float = 0.0f,
+                                          angularDamping: Float = 0.0f,
+                                          fixedRotation: Boolean = false)
 
 trait EntityBuilder[A] {
 
@@ -43,6 +48,7 @@ trait EntityBuilder[A] {
   protected def createBodyDef(properties: PhysicalEntityProperties): BodyDef = {
     val bodyDef = new BodyDef
     bodyDef.`type` = properties.bodyType
+    bodyDef.position.set(properties.position)
     bodyDef.gravityScale = properties.gravityScale
     bodyDef.linearDamping = properties.linearDamping
     bodyDef.angularDamping = properties.angularDamping

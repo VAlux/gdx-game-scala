@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType
 
 object Environment {
 
@@ -15,9 +16,10 @@ object Environment {
     EntitySpawner.chiefSpawner(EntityWithPhysicalProperties(Chief(), Constants.CHIEF_PHYSICAL_PROPERTIES))
   }
 
-  lazy val chiefControllable: Controllable with KeyboardControllable = Log.info("Environment", "Creating Chief controllable instance...") {
-    new Controllable(chief) with KeyboardControllable
-  }
+  lazy val chiefControllable: Controllable with KeyboardControllable =
+    Log.info("Environment", "Creating Chief controllable instance...") {
+      new Controllable(chief) with KeyboardControllable
+    }
 
   lazy val gameFont: BitmapFont = Log.info("Environment", "Creating game font...") {
     createGameFont()
@@ -32,11 +34,21 @@ object Environment {
   }
 
   lazy val topWall: EntityWithBody = Log.info("Environment", "Creating bottom wall...") {
-    createWall(MetricsTranslator.widthInMeter - 10.0f, MetricsTranslator.halfHeightInMeter, 10.0f, MetricsTranslator.halfHeightInMeter)
+    createWall(
+      MetricsTranslator.widthInMeter - Constants.WALL_WIDTH,
+      MetricsTranslator.halfHeightInMeter,
+      Constants.WALL_WIDTH,
+      MetricsTranslator.halfHeightInMeter
+    )
   }
 
   lazy val bottomWall: EntityWithBody = Log.info("Environment", "Creating top wall...") {
-    createWall(MetricsTranslator.widthInMeter - 10.0f, -MetricsTranslator.halfHeightInMeter, 10.0f, MetricsTranslator.halfHeightInMeter)
+    createWall(
+      MetricsTranslator.widthInMeter - Constants.WALL_WIDTH,
+      -MetricsTranslator.halfHeightInMeter,
+      Constants.WALL_WIDTH,
+      MetricsTranslator.halfHeightInMeter
+    )
   }
 
   /**
@@ -71,8 +83,14 @@ object Environment {
   }
 
   private def createWall(x: Float, y: Float, width: Float, height: Float): EntityWithBody = {
-    val wall: EntityWithBody = EntitySpawner.wallSpawner(EntityWithPhysicalProperties(Rectangle(width, height), Constants.WALL_PHYSICAL_PROPERTIES))
-    wall.body.setTransform(x, y, 0.0f)
-    wall
+    def createWallProperties: PhysicalEntityProperties =
+      PhysicalEntityProperties(
+        friction = 0.7f,
+        restitution = 0.1f,
+        bodyType = BodyType.StaticBody,
+        position = new Vector2(x * 0.5f, y * 0.5f) // TODO: figure out, why this is needed to be divided by 2...
+      )
+
+    EntitySpawner.wallSpawner(EntityWithPhysicalProperties(Rectangle(width, height), createWallProperties))
   }
 }

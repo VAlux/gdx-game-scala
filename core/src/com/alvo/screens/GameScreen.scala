@@ -21,13 +21,11 @@ object GameScreen extends Screen {
   val backgroundTexture = new Texture(Gdx.files.internal(Constants.BACKGROUND_PATH))
   val world: World = new World(Constants.GRAVITY, true)
 
-  // Environment entity initialization:
   val chief: Controllable with KeyboardControllable = Environment.chiefControllable
   val frame: EntityWithBody          = Environment.mainBondingFrame
   val secondaryFrame: EntityWithBody = Environment.secondaryBondingFrame
   val topWall: EntityWithBody        = Environment.topWall
   val bottomWall: EntityWithBody     = Environment.bottomWall
-  //
 
   Gdx.input.setInputProcessor(chief)
 
